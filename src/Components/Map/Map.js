@@ -4,17 +4,17 @@ import "./Map.css"
 
 export default function Map() {
 
-    const position = [51.505, -0.09]
+    const position = [-30.2755, 166.8021]
 
     return (
-        <MapContainer center={position} zoom={13}>
+        <MapContainer center={position} zoom={4}>
             <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={position}>
                 <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
+                    ISS
                 </Popup>
             </Marker>
         </MapContainer>
