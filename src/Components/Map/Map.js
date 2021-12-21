@@ -3,7 +3,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import "./Map.css"
 
 export default function Map({positionIss}) {
-    console.log(positionIss);
 
     const position = [positionIss.latitude, positionIss.longitude]
 
@@ -15,7 +14,7 @@ export default function Map({positionIss}) {
             />
             <Marker position={position}>
                 <Popup>
-                    ISS
+                    Je suis l'ISS
                 </Popup>
             </Marker>
         </MapContainer>
