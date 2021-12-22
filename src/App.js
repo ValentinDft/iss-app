@@ -1,26 +1,25 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components'
+import {connect} from 'react-redux';
 
 // Components
 import Map from './Components/Map/Map'
-import Header from './Components/Map/Header'
+import Header from './Components/Header'
 
-export default function App() {
-
-  const [dataISS, setDataISS] = useState({});
+function App(props) {
 
   useEffect(() => {
 
     fetch(`http://api.open-notify.org/iss-now.json`)
       .then(response => response.json())
-      .then(result => result.message === "success" && setDataISS(result.iss_position))
+      .then(result => result.message === "success" && props.issPosition(result.iss_position))
 
   }, [])
 
   return (
     <Container>
       <Header/>
-      {dataISS.latitude !== undefined && <Map positionIss={dataISS}/>}
+      {props.position.success === true && <Map/>}
       
     </Container>
   )
@@ -32,3 +31,17 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
 `;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    issPosition: (pos) => dispatch({type: "dataIss", pos}),
+  }
+}
+
+function mapStateToProps(state) {
+  return { 
+      position: state.iss
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
