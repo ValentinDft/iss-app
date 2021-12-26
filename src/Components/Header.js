@@ -9,6 +9,7 @@ export default function Header() {
     )
 }
 
+// Style
 const ContainerHeader = styled.div`
     background-color: #071052;
     width: 100vw;

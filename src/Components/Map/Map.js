@@ -20,6 +20,7 @@ function Map(props) {
     )
 }
 
+// Redux
 function mapStateToProps(state) {
     return { 
         position: state.iss
