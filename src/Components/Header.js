@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export default function Header() {
     return (
         <ContainerHeader>
-            <Titre>Position de l'ISS</Titre>
+            <h1>Position de l'ISS</h1>
         </ContainerHeader>
     )
 }
@@ -14,9 +14,11 @@ const ContainerHeader = styled.div`
     background-color: #071052;
     width: 100vw;
     margin-bottom: 1%;
-`;
-
-const Titre = styled.h1`
-    color: white;
-    text-align: center;
+    @import url('https://fonts.googleapis.com/css2?family=Istok+Web&display=swap');
+    & h1 {
+        font-family: 'Istok Web', sans-serif;
+        color: white;
+        text-align: center;
+    }
+    
 `;
