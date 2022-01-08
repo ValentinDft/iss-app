@@ -5,9 +5,9 @@ import "./Map.css"
 
 import {connect} from 'react-redux';
 
-function Map(props) {
+function Map({data}) {
 
-    const position = [props.position.latitude, props.position.longitude]
+    const position = [data.latitude, data.longitude]
 
     return (
         <MapContainer center={position} zoom={4}>

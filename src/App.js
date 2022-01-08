@@ -1,25 +1,26 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux';
+
+// Requete
+import { useQuery } from 'react-query'
+import { getPosition } from './app/api';
 
 // Components
 import Map from './Components/Map/Map'
 import Header from './Components/Header'
 
+
 function App(props) {
 
-  useEffect(() => {
-
-    fetch(`http://api.open-notify.org/iss-now.json`)
-      .then(response => response.json())
-      .then(result => result.message === "success" && props.issPosition(result.iss_position))
-
-  }, [])
+  const {isLoading, isSuccess, data, isError, error} = useQuery('iss', () => getPosition(), { staleTime: 60_000 })
 
   return (
     <Container>
       <Header/>
-      {props.position.success === true && <Map/>}
+      {isLoading && <h3>Chargement...</h3>}
+      {isSuccess && <Map data={data.iss_position}/>}
+      {isError && <h3>Erreur... {error.message}</h3>}
       
     </Container>
   )
@@ -34,13 +35,13 @@ const Container = styled.div`
 `;
 
 // Redux
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
-    issPosition: (pos) => dispatch({type: "dataIss", pos}),
+    issPosition: pos => dispatch({type: "GET_POSITION_ISS", pos}),
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return { 
       position: state.iss
   }
