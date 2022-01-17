@@ -2,18 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 import {connect} from 'react-redux';
 
-// Requete
-import { useQuery } from 'react-query'
-import { getPosition } from './app/api';
-
 // Components
 import Map from './Components/Map/Map'
 import Header from './Components/Header'
 
+// Hook requete
+import useISS from "./app/useISS"
 
 function App(props) {
 
-  const {isLoading, isSuccess, data, isError, error} = useQuery('iss', () => getPosition(), { staleTime: 60_000 })
+  const {isLoading, isSuccess, data, isError, error} = useISS()
 
   return (
     <Container>
